@@ -1,0 +1,11 @@
+title: "Computer Science Across the Curriculum"
+description: "A book illustrating the use of Computer Science in various aspects of the National Curriculum."
+baseurl: "/csac"
+permalink: /:title
+sass:
+  style: "compressed"
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"

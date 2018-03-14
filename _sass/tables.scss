@@ -1,0 +1,15 @@
+table {
+  border-collapse: collapse;
+  margin: 1em auto;
+}
+
+td, th {
+  border: 1px solid silver;
+  padding: .25em .5em;
+}
+
+th {
+  background: #f6f8fa;
+  font-weight: 600;
+  text-align: left;
+}

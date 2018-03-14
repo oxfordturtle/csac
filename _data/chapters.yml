@@ -1,0 +1,30 @@
+-
+  url: introduction
+  title: "Introduction, Computer Science for Fun, and Turtling"
+-
+  url: animation-movement-and-user-input
+  title: "Animation, Movement, and User Input"
+-
+  url: computing-in-physics
+  title: "Computing in Physics: Cannons and Rockets"
+-
+  url: cellular-automata
+  title: "Cellular Automata: Modelling Disease, \"Life\", and Shell Patterns"
+-
+  url: computing-in-chemistry
+  title: "Computing in Chemistry: Diffusion and Brownian Motion"
+-
+  url: computing-in-biology
+  title: "Computing in Biology: Evolution and Behaviour"
+-
+  url: chaos-recursion-and-self-similarity
+  title: "Chaos, Recursion, and Self-Simmilarity"
+-
+  url: waves-and-quantum-mechanics
+  title: "Waves and Quantum Mechanics"
+-
+  url: games-and-computer-science
+  title: "Games and Computer Science"
+-
+  url: philosophy-and-social-sciences
+  title: "Philosophy and Social Sciences"

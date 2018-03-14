@@ -1,0 +1,37 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="turtle graphics, programming, coding, education, learn to code">
+    <meta name="description" content="{{ site.description }}">
+    <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}{% link assets/img/favicon.ico %}">
+    <link rel="stylesheet" href="{{ site.baseurl }}{% link assets/css/csac.scss %}">
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script defer src="{{ site.baseurl }}{% link assets/js/csac.js %}"></script>
+    <title>Computer Science Across the Curriculum</title>
+  </head>
+  <body>
+    <nav>
+      {% for chapter in site.data.chapters %}
+        {% assign name = page.name | split: '.' | first %}
+        <a{% if name == chapter.url %} class="active"{% endif %} href="{{ site.baseurl }}/{{ chapter.url }}">{{ forloop.index }}. {{ chapter.title | smartify }}</a>
+      {% endfor %}
+    </nav>
+    <main>
+      <header>
+        <button data-toggle="contents"><i class="fas fa-bars"></i></button>
+        <h1><a href="{{ site.baseurl }}{% link index.md %}">Computer Science Across the Curriculum</a></h1>
+      </header>
+      <section>
+        {{ content }}
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+code, pre {
+  background: #f6f8fa;
+}
+
+code, kbd {
+  font-family: consolas, monospace;
+  font-size: .875em;
+  padding: 0 .25rem;
+}
+
+kbd {
+  background: #707070;
+  color: lightgreen;
+}
+
+pre {
+  margin-bottom: 1em;
+  padding: .5em 1em;
+  border-radius: .25em;
+  overflow: auto;
+  code {
+    padding: 0;
+  }
+}
+
+.highlight {
+  .c1 {
+    color:#909090;
+  }
+  .k {
+    color:#d73a49;
+  }
+  .kr {
+    color:#d73a49;
+  }
+  .kt {
+    color:#005cc5;
+  }
+  .o {
+    color:#d73a49;
+  }
+  .m {
+    color:#005cc5;
+  }
+  .s {
+    color:#3c763d;
+  }
+  .n {
+    color:#005cc5;
+  }
+  .p {
+    color:#909090;
+  }
+}
