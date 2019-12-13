@@ -12,18 +12,18 @@ When implementing cellular automata within _Turtle_, it often makes sense to cha
 
 ```pascal
 PROGRAM LifeStart;
-CONST width=32;
-      height=32;
-VAR x,y: integer;
+CONST width = 32;
+      height = 32;
+VAR x, y: integer;
 BEGIN
-  canvas(0,0,width,height);
-  resolution(width,height);
-  for x := 0 to width-1 do
-    for y := 0 to height-1 do
-      if random(7)=0 then
-        pixset(x,y,black)
+  canvas(0, 0, width, height);
+  resolution(width, height);
+  for x := 0 to width - 1 do
+    for y := 0 to height - 1 do
+      if random(7) = 0 then
+        pixset(x, y, black)
       else
-        pixset(x,y,white)
+        pixset(x, y, white)
 END.
 ```
 
@@ -53,21 +53,21 @@ The canvas is temporarily frozen (using `noupdate` ... `update`) while this colo
 Having finished this initialisation, the spread and eventual decline of the infection are modelled with a loop that continues until `numinfected` becomes zero. The loop starts by choosing a random value of `x` between 0 and (`width-1`) and a random value of `y` between 0 and (`height-1`). Then we check the colour of cell `(x,y)` to see whether it is `infected` (i.e. `red`) or not. If it is, then with probability `recoverprob` (15%), we change it to `recovered` (i.e. `blue`), to indicate that it has now recovered and thus become immune from further infection. (To do this with the correct probability, we use the conditional `if random(100)<recoverprob` to select a random number between 0 and 99 and check whether it is less than `recoverprob`.) Finally, if the cell is infected and has _not_ recovered, then the following code is executed:
 
 ```pascal
-n:=random(4)*2+1;
-x:=x+n div 3-1;
-y:=y+n mod 3-1;
-if pixcol(x,y)=susceptible then
-  infect(x,y);
+n :=random(4) * 2 + 1;
+x := x + n div 3 - 1;
+y := y + n mod 3 - 1;
+if pixcol(x, y) = susceptible then
+  infect(x, y);
 ```
 
 The purpose of this code is to select at random one of the four closest neighbours of the infected cell and then, if that cell is `susceptible` (i.e. `lightgreen`), to infect it -- this is how the infection spreads. The arithmetic here is neat but a bit tricky, going through the following steps and using the operators for integer division (`div`) and remainder (`mod`):
 
-| `random(4)` | `random(4)*2` | `n` | `n div 3` | `n div 3 -- 1` | `n mod 3` | `n mod 3 -- 1` |
-| ----------- | ------------- | --- | --------- | ------------- | --------- | ------------- |
-| 0           | 0             | 1   | 0         | -1            | 1         | 0             |
-| 1           | 2             | 3   | 1         | 0             | 0         | -1            |
-| 2           | 4             | 5   | 1         | 0             | 2         | 1             |
-| 3           | 6             | 7   | 2         | 1             | 1         | 0             |
+| `random(4)` | `random(4) * 2` | `n` | `n div 3` | `n div 3 - 1` | `n mod 3` | `n mod 3 - 1` |
+| ----------- | --------------- | --- | --------- | ------------- | --------- | ------------- |
+| 0           | 0               | 1   | 0         | -1            | 1         | 0             |
+| 1           | 2               | 3   | 1         | 0             | 0         | -1            |
+| 2           | 4               | 5   | 1         | 0             | 2         | 1             |
+| 3           | 6               | 7   | 2         | 1             | 1         | 0             |
 
 The first, fifth, and last columns show the four possible random numbers (between 0 and 3), and the corresponding values that get added to `x` and `y` respectively. Adding `(-1,0)` corresponds to a move left on the canvas, `(0,-1)` to a move up, `(0,1)` to a move down, and `(1,0)` to a move right. So after these additions, the coordinates `(x,y)` do indeed identify one of the four neighbouring cells. Now it just remains to test whether that cell is `susceptible` (`lightgreen`), and if it is, to infect it (`red`).
 
@@ -216,9 +216,9 @@ for i := -1 to 1 do
 
 for j := -1 to 1 do
 
-dn := dn + pixcol((x+i+width) mod width,
+dn := dn + pixcol((x + i + width) mod width,
 
-(y+j+height) mod height) and 1;
+(y + j + height) mod height) and 1;
 
 Suppose for example, that _x_ is 31 and _y_ is 0 on a 32×32 grid, so the pixel (_x_,_y_) is at the top-right corner. Then as _i_ and _j_ both count from -1 to 1, the expression "(_x_+_i_, _y_+_j_)" passes through 9 combinations of coordinates (including (31, 0) itself when both _i_ and _j_ are zero):
 
@@ -232,10 +232,10 @@ _i = -1; x+i = 30 i = 0; x+i = 31 i = 1; x+i = 32_
 
 The shaded combinations are not legitimate gridpoints, because the coordinates in each direction run only from 0 to 31, so both -1 and 32 are "illegal" values. But suppose now that we do the following to the coordinates within each pair -- _add 32, then take the remainder on division by 32_. The effect on the numbers shown above is as follows (using _mod_ as the remainder function):
 
-| _n_ |         | -1 | 0 | 1 | 30 | 31 | 32 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| _n_ + 32 |  | 31 | 32 | 33 | 62 | 63 | 64 |
-| (_n_ + 32) _mod_ 32 |  | 31 | 0 | 1 | 30 | 31 | 0 |
+| _n_                 |    | -1 | 0  | 1  | 30 | 31 | 32 |
+| ------------------- | -- | -- | -- | -- | -- | -- | -- |
+| _n_ + 32            |    | 31 | 32 | 33 | 62 | 63 | 64 |
+| (_n_ + 32) _mod_ 32 |    | 31 | 0  | 1  | 30 | 31 | 0  |
 
 Notice how -1 has "wrapped around" to 31, and 32 to 0, while the four legitimate values are unaffected. This changes our 9 combinations of coordinates to exactly what we want them to be:
 
@@ -247,9 +247,9 @@ Notice how -1 has "wrapped around" to 31, and 32 to 0, while the four legitimate
 
 Thus our command:
 
-dn := dn + pixcol((x+i+width) mod width,
+dn := dn + pixcol((x + i + width) mod width,
 
-(y+j+height) mod height) and 1;
+(y + j + height) mod height) and 1;
 
 does check the correct neighbourhood of pixels around (_x_,_y_), both at the edges and in the middle of the grid (and it's written in such a way that _width_ and _height_ could take values other than 32).
 
